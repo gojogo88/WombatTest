@@ -10,7 +10,7 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-final class MainVC: UIViewController {
+final class ViewController: UIViewController {
 
     // MARK: - Properties
     var viewModel: AccountViewModel!
@@ -178,7 +178,7 @@ final class MainVC: UIViewController {
     }
 }
 
-extension MainVC {
+extension ViewController {
     
     // MARK: - Private Methods
     private func setupViews() {
