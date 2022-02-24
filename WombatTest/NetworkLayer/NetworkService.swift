@@ -14,8 +14,6 @@ final class NetworkService: NetworkServicing {
     public static let shared = NetworkService()
     private init() {}
     
-    let httpClient: HttpClient = HttpClient.sharedService
-
     private let jsonDecoder: JSONDecoder = {
         let jsonDecoder = JSONDecoder()
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -71,3 +69,4 @@ final class NetworkService: NetworkServicing {
             }
         }
     }
+}

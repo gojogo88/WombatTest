@@ -13,12 +13,12 @@
 		6CDEBB1B27C70325000FB1F3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDEBB1A27C70325000FB1F3 /* ViewController.swift */; };
 		6CDEBB2027C70326000FB1F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CDEBB1F27C70326000FB1F3 /* Assets.xcassets */; };
 		6CDEBB2327C70326000FB1F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CDEBB2127C70326000FB1F3 /* LaunchScreen.storyboard */; };
-		6CDEBB2C27C7046F000FB1F3 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDEBB2B27C7046F000FB1F3 /* HttpClient.swift */; };
 		6CDEBB2E27C70499000FB1F3 /* NetworkServicing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDEBB2D27C70499000FB1F3 /* NetworkServicing.swift */; };
 		6CDEBB3027C704B5000FB1F3 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDEBB2F27C704B5000FB1F3 /* NetworkService.swift */; };
 		6CDEBB3227C70588000FB1F3 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDEBB3127C70588000FB1F3 /* Account.swift */; };
 		6CDEBB3527C705B5000FB1F3 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDEBB3427C705B5000FB1F3 /* AccountViewModel.swift */; };
-		6CDEBB3727C7089E000FB1F3 /* ObservableType+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDEBB3627C7089E000FB1F3 /* ObservableType+Ext.swift */; };
+		6CDEBB3927C76686000FB1F3 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDEBB3827C76686000FB1F3 /* Unit.swift */; };
+		6CDEBB3B27C76694000FB1F3 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDEBB3A27C76694000FB1F3 /* Time.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,12 +30,12 @@
 		6CDEBB1F27C70326000FB1F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6CDEBB2227C70326000FB1F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6CDEBB2427C70326000FB1F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6CDEBB2B27C7046F000FB1F3 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		6CDEBB2D27C70499000FB1F3 /* NetworkServicing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServicing.swift; sourceTree = "<group>"; };
 		6CDEBB2F27C704B5000FB1F3 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		6CDEBB3127C70588000FB1F3 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		6CDEBB3427C705B5000FB1F3 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
-		6CDEBB3627C7089E000FB1F3 /* ObservableType+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+Ext.swift"; sourceTree = "<group>"; };
+		6CDEBB3827C76686000FB1F3 /* Unit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
+		6CDEBB3A27C76694000FB1F3 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		C5BEBF4FDC1DD60EC18E3A9A /* Pods_WombatTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WombatTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6404A8DE713A2C96E064B56 /* Pods-WombatTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WombatTest.release.xcconfig"; path = "Target Support Files/Pods-WombatTest/Pods-WombatTest.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,9 +86,9 @@
 				6CDEBB1827C70325000FB1F3 /* SceneDelegate.swift */,
 				6CDEBB1A27C70325000FB1F3 /* ViewController.swift */,
 				6CDEBB3427C705B5000FB1F3 /* AccountViewModel.swift */,
-				6CDEBB3627C7089E000FB1F3 /* ObservableType+Ext.swift */,
 				6CDEBB3327C7059D000FB1F3 /* Model */,
 				6CDEBB2A27C70448000FB1F3 /* NetworkLayer */,
+				6CDEBB3C27C766A0000FB1F3 /* Helpers */,
 				6CDEBB1F27C70326000FB1F3 /* Assets.xcassets */,
 				6CDEBB2127C70326000FB1F3 /* LaunchScreen.storyboard */,
 				6CDEBB2427C70326000FB1F3 /* Info.plist */,
@@ -99,7 +99,6 @@
 		6CDEBB2A27C70448000FB1F3 /* NetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
-				6CDEBB2B27C7046F000FB1F3 /* HttpClient.swift */,
 				6CDEBB2D27C70499000FB1F3 /* NetworkServicing.swift */,
 				6CDEBB2F27C704B5000FB1F3 /* NetworkService.swift */,
 			);
@@ -112,6 +111,15 @@
 				6CDEBB3127C70588000FB1F3 /* Account.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		6CDEBB3C27C766A0000FB1F3 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6CDEBB3827C76686000FB1F3 /* Unit.swift */,
+				6CDEBB3A27C76694000FB1F3 /* Time.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		D84CFD8112DEA183BA2DC536 /* Frameworks */ = {
@@ -238,9 +246,9 @@
 			files = (
 				6CDEBB1B27C70325000FB1F3 /* ViewController.swift in Sources */,
 				6CDEBB1727C70325000FB1F3 /* AppDelegate.swift in Sources */,
+				6CDEBB3B27C76694000FB1F3 /* Time.swift in Sources */,
 				6CDEBB3527C705B5000FB1F3 /* AccountViewModel.swift in Sources */,
-				6CDEBB3727C7089E000FB1F3 /* ObservableType+Ext.swift in Sources */,
-				6CDEBB2C27C7046F000FB1F3 /* HttpClient.swift in Sources */,
+				6CDEBB3927C76686000FB1F3 /* Unit.swift in Sources */,
 				6CDEBB1927C70325000FB1F3 /* SceneDelegate.swift in Sources */,
 				6CDEBB3027C704B5000FB1F3 /* NetworkService.swift in Sources */,
 				6CDEBB2E27C70499000FB1F3 /* NetworkServicing.swift in Sources */,

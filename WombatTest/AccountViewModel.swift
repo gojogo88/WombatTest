@@ -5,85 +5,78 @@
 //  Created by Jonathan Go on 24.02.22.
 //
 
-import UIKit
+import Foundation
 import RxSwift
-
-struct SignInDetails {
-    let emailText: String
-    let passwordText: String
-}
-
-class AccountViewModel {
-
-    //input
-    let networkService: NetworkServicing
-    private var disposeBag: DisposeBag
-
-    //output
-    var queryIsValid: Observable<Bool>!
-    //var passwordIsValid: Observable<Bool>!
-    var searchButtonEnabled: Observable<Bool>!
-    var account: Observable<Account>!
+import RxCocoa
 
 
-    init(networkService: NetworkServicing = NetworkService.shared, disposeBag: DisposeBag) {
+final class AccountViewModel {
+    
+    private let networkService: NetworkServicing!
+    let title = "EOS"
+    private let _alertMessage = PublishSubject<String>()
+    let alertMessage: Observable<String>
+    
+    init(networkService: NetworkServicing = NetworkService.shared) {
         self.networkService = networkService
-        self.disposeBag = disposeBag
+        self.alertMessage = _alertMessage.asObservable()
     }
-
-    func configure(
-        queryText: Observable<String>,
-        searchButtonTap: Observable<Void>) {
-
-        // Query
-        let queryRegexMatcher = RegexMatcher(regex: "[a-z1-5.]{1,12}")
-            queryIsValid = queryText.map({
-            return queryRegexMatcher.matches(string: $0)
-        })
+    
+    func getAccount(_ accountName: String) -> Observable<Account> {
+        return networkService.fetchAccountDetails(accountName: accountName)
+            .catch { [weak self] error in
+                self?._alertMessage.onNext(error.localizedDescription)
+                return Observable.empty()
+            }
+    }
+    
+    func fetchViewModel(trigger: Observable<Void>, text: Observable<String?>) -> Observable<String> {
+        trigger
+            .withLatestFrom(text.map { $0 ?? "" })
+            .filter { $0.isValid() }
+    }
+    
+    func accountNameViewModel(account: Observable<Account>) -> Observable<String> {
+        account.map { $0.accountName }
+    }
+    
+    func totalBalanceViewModel(account: Observable<Account>) -> Observable<String> {
+        account.map { $0.coreLiquidBalance }
+    }
+    
+    func netValueViewModel(account: Observable<Account>) -> Observable<String> {
+        account.map {
+            let nMax = Int64(Int($0.netLimit.max))
+            let nMaxString = Units(bytes: nMax).getReadableUnit()
             
-        //SignIn Button
-//            searchButtonEnabled = Observable.map { queryIsValid -> Bool in
-//            return queryIsValid
-//            }
-//            .startWith(false)
-
-        
-        account = Observable.combineLatest(queryText,
-                                                queryIsValid,
-                                                searchButtonTap,
-                                                resultSelector: { (queryText, queryIsValid, searchButtonTap) -> String? in
-
-                                                    guard queryIsValid else { return nil }
-                                                    return queryText
-        }).unwrap()
-        .flatMapLatest({[weak self] searchString -> Observable<Account> in
-            guard let strongSelf = self else { return .empty() }
-            return strongSelf.networkService.fetchAccountDetails(accountName: searchString)
-        }).take(1)
+            let nUsed = Int64(Int($0.netLimit.used))
+            let nUsedString = Units(bytes: nUsed).getReadableUnit()
+            
+            return "NET used - \(nUsedString) / \(nMaxString)"
+        }
     }
-}
-
-struct RegexMatcher {
-    let regex: String
-
-    func matches(string: String) -> Bool {
-        let reguralExpression = try? NSRegularExpression(pattern: regex, options: .caseInsensitive)
-        return reguralExpression?.firstMatch(in: string, options: [], range: NSRange(location: 0, length: string.count)) != nil
+    
+    func ramValueViewModel(account: Observable<Account>) -> Observable<String> {
+        account.map {
+            let ramUsed = Float($0.ramUsage)
+            let ramUsedString = Time(microseconds: ramUsed).timeInString()
+            
+            let ramMax = Float($0.ramQuota)
+            let ramMaxString = Time(microseconds: ramMax).timeInString()
+            
+            return "RAM used - \(ramUsedString) / \(ramMaxString)"
+        }
     }
-
-}
-
-
-extension Optional where Wrapped: StringType {
-    var isEmptyOrNil: Bool {
-        return self?.get.isEmpty ?? true
+    
+    func cpuValueViewModel(account: Observable<Account>) -> Observable<String> {
+        account.map {
+            let cpuMax = Int64(Int($0.cpuLimit.max))
+            let cpuMaxString = Units(bytes: cpuMax).getReadableUnit()
+            
+            let cpuUsed = Int64(Int($0.cpuLimit.used))
+            let cpuUsedString = Units(bytes: cpuUsed).getReadableUnit()
+            
+            return "CPU used - \(cpuUsedString) / \(cpuMaxString)"
+        }
     }
-}
-
-protocol StringType {
-    var get: String { get }
-}
-
-extension String: StringType {
-    var get: String { return self }
 }
