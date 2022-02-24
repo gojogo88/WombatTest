@@ -14,6 +14,7 @@ final class AccountViewModel {
     
     private let networkService: NetworkServicing!
     let title = "EOS"
+    
     private let _alertMessage = PublishSubject<String>()
     let alertMessage: Observable<String>
     
@@ -25,7 +26,6 @@ final class AccountViewModel {
     func getAccount(_ accountName: String) -> Observable<Account> {
         return networkService.fetchAccountDetails(accountName: accountName)
             .catch { [weak self] error in
-                //guard let self = self else { return Observable.empty() }
                 self?._alertMessage.onNext(error.localizedDescription)
                 return Observable.empty()
             }
