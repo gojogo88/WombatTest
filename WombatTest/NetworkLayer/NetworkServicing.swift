@@ -12,23 +12,32 @@ protocol NetworkServicing {
     func fetchAccountDetails(accountName: String) -> Observable<Account>
 }
 
-public enum AccountError: Error {
+public enum AccountError: LocalizedError {
     case apiError
     case invalidData
     case invalidResponse
     case serializationError
     
-    var localizedDescription: String {
+    public var failureReason: String? {
         switch self {
         case .apiError: return "Failed to fetch data"
         case .invalidData: return "Invalid data"
-        case .invalidResponse: return "Invalid response"
+        case .invalidResponse: return "Invalid response. Please check your account name."
         case .serializationError: return "Failed to decode data"
         }
     }
-    
-    var errorUserInfo: [String : Any] {
-        [NSLocalizedDescriptionKey: localizedDescription]
-    }
+
+//    var localizedDescription: String {
+//        switch self {
+//        case .apiError: return "Failed to fetch data"
+//        case .invalidData: return "Invalid data"
+//        case .invalidResponse: return "Invalid response"
+//        case .serializationError: return "Failed to decode data"
+//        }
+//    }
+//
+//    var errorUserInfo: [String : Any] {
+//        [NSLocalizedDescriptionKey: localizedDescription]
+//    }
 }
 

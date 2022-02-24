@@ -16,8 +16,8 @@ final class ViewController: UIViewController {
     var viewModel: AccountViewModel!
     private let disposeBag = DisposeBag()
     
-    private lazy var searchTextField: UITextField = {
-        let tf = UITextField()
+    private lazy var searchTextField: TintTextField = {
+        let tf = TintTextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.layer.borderColor = UIColor.white.cgColor
         tf.layer.borderWidth = 1
@@ -25,8 +25,13 @@ final class ViewController: UIViewController {
         tf.placeholder = "Enter account name"
         tf.textColor = .white
         tf.autocapitalizationType = .none
+        tf.clearButtonMode = .always
+        tf.tintColor = .white
         
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: tf.frame.height))
+        let clearImage = UIImage(systemName: "x.circle.fill")!
+        tf.clearButtonWithImage(clearImage)
+        
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: tf.frame.height))
         tf.leftView = paddingView
         tf.leftViewMode = .always
         tf.font = .systemFont(ofSize: 16, weight: .regular)
@@ -54,17 +59,6 @@ final class ViewController: UIViewController {
         sv.spacing = 10
         sv.alignment = .center
         return sv
-    }()
-    
-    private var searchBar: UISearchBar = {
-        let sb = UISearchBar()
-        sb.translatesAutoresizingMaskIntoConstraints = false
-        sb.barTintColor =  UIColor(named: "myBackground")
-        sb.searchTextField.textColor = UIColor(named: "mySearchButtonColor")
-        sb.placeholder = "Enter account name"
-        sb.searchTextField.backgroundColor = .systemGray3
-        sb.searchTextField.autocapitalizationType = .none
-        return sb
     }()
     
     private lazy var accountNameLabel: UILabel = {
@@ -164,8 +158,7 @@ final class ViewController: UIViewController {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "myBackground")
-        
+    
         setupViews()
         setupHeirarchy()
         setupLayout()
@@ -182,6 +175,7 @@ extension ViewController {
     
     // MARK: - Private Methods
     private func setupViews() {
+        view.backgroundColor = UIColor(named: "myBackground")
         navigationItem.title = viewModel.title
         navigationController?.navigationBar.prefersLargeTitles = true
         let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -250,10 +244,6 @@ extension ViewController {
     }
     
     private func bindViewModel() {
-        viewModel.getAccount("genialwombat").subscribe(onNext: { account in
-            print(account)
-        }).disposed(by: disposeBag)
-        
         viewModel.alertMessage
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in self?.presentAlert(message: $0) })
