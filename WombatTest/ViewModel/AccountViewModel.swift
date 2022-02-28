@@ -59,11 +59,11 @@ final class AccountViewModel {
     
     func ramValueViewModel(account: Observable<Account>) -> Observable<String> {
         account.map {
-            let ramUsed = Float($0.ramUsage)
-            let ramUsedString = Time(microseconds: ramUsed).timeInString()
+            let ramUsed = Int64(Int($0.ramUsage))
+            let ramUsedString = Units(bytes: ramUsed).getReadableUnit()
             
-            let ramMax = Float($0.ramQuota)
-            let ramMaxString = Time(microseconds: ramMax).timeInString()
+            let ramMax = Int64(Int($0.ramQuota))
+            let ramMaxString = Units(bytes: ramMax).getReadableUnit()
             
             return "RAM used - \(ramUsedString) / \(ramMaxString)"
         }
@@ -71,11 +71,11 @@ final class AccountViewModel {
     
     func cpuValueViewModel(account: Observable<Account>) -> Observable<String> {
         account.map {
-            let cpuMax = Int64(Int($0.cpuLimit.max))
-            let cpuMaxString = Units(bytes: cpuMax).getReadableUnit()
+            let cpuMax = Float($0.cpuLimit.max)
+            let cpuMaxString = Time(microseconds: cpuMax).timeInString()
             
-            let cpuUsed = Int64(Int($0.cpuLimit.used))
-            let cpuUsedString = Units(bytes: cpuUsed).getReadableUnit()
+            let cpuUsed = Float($0.cpuLimit.used)
+            let cpuUsedString = Time(microseconds: cpuUsed).timeInString()
             
             return "CPU used - \(cpuUsedString) / \(cpuMaxString)"
         }

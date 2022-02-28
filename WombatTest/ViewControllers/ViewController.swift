@@ -100,7 +100,7 @@ final class ViewController: UIViewController {
     private lazy var ramTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 18, weight: .medium)
+        label.font = .systemFont(ofSize: 16, weight: .medium)
         label.textColor = .white
         label.text = "RAM"
         return label
@@ -109,7 +109,7 @@ final class ViewController: UIViewController {
     private lazy var ramValueLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.font = .systemFont(ofSize: 16, weight: .bold)
         label.textColor = .white
         return label
     }()
@@ -117,7 +117,7 @@ final class ViewController: UIViewController {
     private lazy var cpuTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 18, weight: .medium)
+        label.font = .systemFont(ofSize: 16, weight: .medium)
         label.textColor = .white
         label.text = "CPU"
         return label
@@ -126,7 +126,7 @@ final class ViewController: UIViewController {
     private lazy var cpuValueLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.font = .systemFont(ofSize: 16, weight: .bold)
         label.textColor = .white
         return label
     }()
@@ -134,7 +134,7 @@ final class ViewController: UIViewController {
     private lazy var netTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 18, weight: .medium)
+        label.font = .systemFont(ofSize: 16, weight: .medium)
         label.textColor = .white
         label.text = "NET:"
         return label
@@ -143,7 +143,7 @@ final class ViewController: UIViewController {
     private lazy var netValueLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.font = .systemFont(ofSize: 16, weight: .bold)
         label.textColor = .white
         return label
     }()
